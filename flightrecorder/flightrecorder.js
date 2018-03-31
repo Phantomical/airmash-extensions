@@ -32,7 +32,7 @@
         WebSocket = function (url) {
             var ws = new WebSocketOld(url);
 
-            oldSend = ws.send;
+            ws.oldSend = ws.send;
             ws.send = function (msg) {
                 if (am_enabled) {
                     messages.push(msg);
@@ -40,7 +40,7 @@
 
                 console.log("message!");
 
-                return oldSend(ws, msg);
+                return ws.oldSend(msg);
             }
 
             return ws;
