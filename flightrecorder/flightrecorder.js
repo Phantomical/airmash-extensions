@@ -40,7 +40,7 @@
 
                 console.log("message!");
 
-                return oldSend(msg);
+                return oldSend(ws, msg);
             }
 
             return ws;
