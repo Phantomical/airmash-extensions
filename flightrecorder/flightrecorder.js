@@ -30,13 +30,15 @@
     SWAM.on("extensionsLoaded", function () {
         const WebSocketOld = WebSocket;
         WebSocket = function (url) {
-            var ws = new WebSocket(url);
+            var ws = new WebSocketOld(url);
 
             oldSend = ws.send;
             ws.send = function (msg) {
                 if (am_enabled) {
                     messages.push(msg);
                 }
+
+                console.log("message!");
 
                 return oldSend(msg);
             }
