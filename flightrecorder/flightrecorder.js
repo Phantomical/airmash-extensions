@@ -52,7 +52,7 @@
         id: "FlightRecorder",
         description: "An extension to record what the client sees and allow it to be replayed at a later time.",
         author: "STEAMROLLER",
-        version: "0.1",
+        version: "0.2",
         settingsProvider: createSettingsProvider()
     });
 }();
