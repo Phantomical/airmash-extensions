@@ -38,13 +38,18 @@
                     messages.push(msg);
                 }
 
-                console.log("message!");
-
                 return ws.oldSend(msg);
             }
 
             return ws;
         };
+    });
+
+    SWAM.on("keyup", function (event) {
+        // If j
+        if (event.keyCode === 74) {
+            displayDownloadLink();
+        }
     });
     
     SWAM.registerExtension({
@@ -52,7 +57,7 @@
         id: "FlightRecorder",
         description: "An extension to record what the client sees and allow it to be replayed at a later time.",
         author: "STEAMROLLER",
-        version: "0.3",
+        version: "0.4",
         settingsProvider: createSettingsProvider()
     });
 }();
