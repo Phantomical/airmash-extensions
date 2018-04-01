@@ -25,6 +25,12 @@
     function displayDownloadLink() {
         var blob = new Blob(messages);
         UI.addChatLine(Players.getMe().id, URL.createObjectURL(blob), 1);
+
+        // Keep the blob alive for the player to click on
+        setTimeout(function () {
+            var keepAlive = blob;
+            UI.addChatLine(Players.getME().id, "download link no longer valid.");
+        }, 60 * 1000);
     }
 
     SWAM.on("extensionsLoaded", function () {
@@ -57,7 +63,7 @@
         id: "FlightRecorder",
         description: "An extension to record what the client sees and allow it to be replayed at a later time.",
         author: "STEAMROLLER",
-        version: "0.4",
+        version: "0.5",
         settingsProvider: createSettingsProvider()
     });
 }();
