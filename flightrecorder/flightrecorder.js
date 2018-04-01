@@ -2,6 +2,7 @@
 !function () {
     var messages = [];
     var am_enabled = false;
+    var startTime = new Date();
 
     function createSettingsProvider() {
         let sp = new SettingsProvider({ enabled: false }, function (values) {
@@ -27,6 +28,10 @@
         window.open(URL.createObjectURL(blob))
     }
 
+    SWAM.on("gameLoaded", function () {
+        startTime = new Date();
+    });
+
     SWAM.on("extensionsLoaded", function () {
         const WebSocketOld = WebSocket;
         WebSocket = function (url) {
@@ -35,6 +40,15 @@
             ws.oldSend = ws.send;
             ws.send = function (msg) {
                 if (am_enabled) {
+                    var timeDiff = new Date() - startTime;
+                    // Store time and packetsize
+                    var buffer = new ArrayBuffer(8);
+                    var view = new Int32Array(buffer);
+
+                    view[0] = msg.length;
+                    view[1] = timeDiff;
+
+                    messages.push(buffer);
                     messages.push(msg);
                 }
 
