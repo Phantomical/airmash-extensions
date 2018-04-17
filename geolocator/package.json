@@ -5,9 +5,8 @@
   "main": "geolocator.js",
   "scripts": {
     "build": "browserify --node geolocator.js | babel -s inline --presets=es2015 | uglifyjs -cm > geolocator.min.js",
-    "lint": "jshint balancebot.js",
+    "lint": "jshint geolocator.js",
     "prebuild": "npm run lint",
-    "start": "node statsbot.js"
   },
   "author": "",
   "license": "MIT",
