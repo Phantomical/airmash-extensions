@@ -34,7 +34,7 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.0.2"
+        version: "0.0.3"
     });
 
 }();
