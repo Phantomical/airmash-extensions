@@ -1,5 +1,5 @@
 !function () {
-    const throttle = require('throttle-debounce/throttle');
+    //const throttle = require('throttle-debounce/throttle');
 
     const MAPSAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
 
@@ -10,12 +10,12 @@
         return lat.toString().substring(0, 10) + "+" + lon.toString().substring(0, 10);
     }
     function getLocation(x, y) {
-        throttle(1000, false, function () {
+       // throttle(1000, false, function () {
             let loc = getLatLonStr(lat, lon);
             $.getJSON(MAPSAPI + loc, function (data) {
                 UI.addChatLine(Players.getMe().id, data, 2);
             });
-        }, false);
+        //}, false);
     }
 
     SWAM.on("keyup", function (event) {
@@ -34,7 +34,7 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.0.3"
+        version: "0.0.4"
     });
 
 }();
