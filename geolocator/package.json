@@ -1,0 +1,28 @@
+{
+  "name": "geolocator",
+  "version": "0.0.1",
+  "description": "Airmash Geolocator extension\"",
+  "main": "geolocator.js",
+  "scripts": {
+    "build": "browserify --node geolocator.js | babel -s inline --presets=es2015 | uglifyjs -cm > geolocator.min.js",
+    "lint": "jshint balancebot.js",
+    "prebuild": "npm run lint",
+    "start": "node statsbot.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "browserify": "^16.2.0",
+    "jshint": "^2.9.5",
+    "uglify-js": "^3.3.20"
+  },
+  "jshintConfig": {
+    "esversion": 6,
+    "node": true
+  },
+  "dependencies": {
+    "throttle-debounce": "^1.0.1"
+  }
+}
