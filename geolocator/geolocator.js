@@ -7,7 +7,7 @@
         let lat = -(Players.getMe().pos.y - 2370) * (82.2 / 8192);
         let lon = Players.getMe().pos.x * (180 / 16384);
 
-        return lat.toString().substring(0, 10) + "+" + lon.toString().substring(0, 10) );
+        return lat.toString().substring(0, 10) + "+" + lon.toString().substring(0, 10);
     }
     function getLocation(x, y) {
         throttle(1000, false, function () {
