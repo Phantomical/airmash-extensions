@@ -11,7 +11,7 @@
     }
     function getLocation(x, y) {
        // throttle(1000, false, function () {
-            let loc = getLatLonStr(lat, lon);
+            let loc = getLatLonStr(x, y);
             $.getJSON(MAPSAPI + loc, function (data) {
                 UI.addChatLine(Players.getMe().id, data, 2);
             });
@@ -34,7 +34,7 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.0.4"
+        version: "0.0.5"
     });
 
 }();
