@@ -23,6 +23,8 @@
         if (event.keyCode === 74) {
             let pos = Players.getMe().pos;
 
+            console.log(pos);
+
             getLocation(pos.x, pos.y);
         }
     });
@@ -32,7 +34,7 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.0.1"
+        version: "0.0.2"
     });
 
 }();
