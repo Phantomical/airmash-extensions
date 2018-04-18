@@ -245,9 +245,26 @@
         "ESH": "Western Sahara",
         "YEM": "Yemen",
         "ZMB": "Zambia",
-        "ZWE": "Zimbabwe"
+        "ZWE": "Zimbabwe",
+        "RKS": "Republic of Kosovo"
     };
     const command = "/whereami";
+    let am_enabled = true;
+
+    function createSettingsProvider() {
+        let sp = new SettingsProvider({ enabled: true }, function (values) {
+            am_enabled = values.enabled;
+        });
+
+        let section = sp.addSection("Geolocator");
+
+        section.addBoolean(
+            "enabled",
+            "Whether the key J will show you the country you're in.",
+            { useToggle: false });
+
+        return sp;
+    }
 
     function getCountryName(countryCode) {
         if (isoCountries.hasOwnProperty(countryCode)) {
@@ -257,16 +274,21 @@
         }
     }
 
+    function getLatLon(x, y) {
+        return {
+            lat: -(180 / Math.PI) * 1.25 * Math.atan(Math.sinh((y - 2284) * 0.8 * (Math.PI * 0.5 / 8192))),
+            lon: (x + 47) * (180 / 16384),
+        };
+    }
 
     function getLatLonStr(x, y) {
-        let lat = -(Players.getMe().pos.y - 2370) * (82.2 / 8192);
-        let lon = Players.getMe().pos.x * (180 / 16384);
+        let coords = getLatLon(x, y);
 
-        return getCountryName(findCountry([lon, lat]));
+        return getCountryName(findCountry([coords.lon, coords.lat]));
     }
     function getLocation(x, y) {
         if (x == 0 && y == 0) {
-            UI.addChatMessage("You are in space", true);
+            UI.addChatMessage("You are in Outer Space", true);
             return;
         }
 
@@ -290,21 +312,31 @@
 
     SWAM.on("keyup", function (event) {
         // If j
-        if (event.keyCode === 74) {
+        if (am_enabled && event.keyCode === 74) {
             sendLocation();
         }
     });
-
     SWAM.on("gameRunning", function () {
         const oldParseCommand = UI.parseCommand;
         UI.parseCommand = function (cmd) {
+            let pos = Players.getMe().pos;
+            let coords = getLatLon(pos.x, pos.y);
             if (cmd.toLowerCase() === command) {
                 sendLocation();
-                return true;
+            }
+            else if (cmd.toLowerCase() === '/mycoords') {
+                UI.addChatMessage("lat: " + coords.lat + ", lon: " + coords.lon);
+            }
+            else if (cmd.toLowerCase() === '/googleme') {
+                UI.addChatLine(Players.getMe(),
+                    'You are at https://maps.google.com/maps?q=loc:' +
+                    + coords.lat + "," + coords.lon,
+                    2);
             }
             else {
                 return oldParseCommand(cmd);
             }
+            return true;
         };
     });
 
@@ -313,7 +345,8 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.0.13"
+        version: "0.1.1",
+        settingsProvider: createSettingsProvider()
     });
 
 })();
