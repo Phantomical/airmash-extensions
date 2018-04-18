@@ -4,8 +4,10 @@
   "description": "Airmash Geolocator extension\"",
   "main": "geolocator.js",
   "scripts": {
+    "browserify": "browserify --node geolocator.js -o geolocator.min.js",
     "build": "browserify --node geolocator.js | babel -s inline --presets=es2015 | uglifyjs -cm > geolocator.min.js",
-    "lint": "jshint geolocator.js"
+    "lint": "jshint geolocator.js",
+    "prebuild": "npm run lint"
   },
   "author": "",
   "license": "MIT",
@@ -21,6 +23,7 @@
     "esversion": 6
   },
   "dependencies": {
+    "i18n-iso-countries": "^3.6.1",
     "throttle-debounce": "^1.0.1",
     "which-country": "^1.0.0"
   }
