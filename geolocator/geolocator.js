@@ -247,7 +247,8 @@
         "ZMB": "Zambia",
         "ZWE": "Zimbabwe"
     };
-    
+    const command = "/whereami";
+
     function getCountryName(countryCode) {
         if (isoCountries.hasOwnProperty(countryCode)) {
             return isoCountries[countryCode];
@@ -255,6 +256,7 @@
             return countryCode;
         }
     }
+
 
     function getLatLonStr(x, y) {
         let lat = -(Players.getMe().pos.y - 2370) * (82.2 / 8192);
@@ -267,7 +269,7 @@
             UI.addChatMessage("You are in space", true);
             return;
         }
-        
+
         let name = getLatLonStr(x, y);
         var message = '';
         if (!!name) {
@@ -280,13 +282,30 @@
         UI.addChatMessage(message, true);
     }
 
+    function sendLocation() {
+        let pos = Players.getMe().pos;
+
+        getLocation(pos.x, pos.y);
+    }
+
     SWAM.on("keyup", function (event) {
         // If j
         if (event.keyCode === 74) {
-            let pos = Players.getMe().pos;
-
-            getLocation(pos.x, pos.y);
+            sendLocation();
         }
+    });
+
+    SWAM.on("gameRunning", function () {
+        const oldParseCommand = UI.parseCommand;
+        UI.parseCommand = function (cmd) {
+            if (cmd.toLowerCase() === command) {
+                sendLocation();
+                return true;
+            }
+            else {
+                return oldParseCommand(cmd);
+            }
+        };
     });
 
     SWAM.registerExtension({
@@ -294,7 +313,7 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.0.12"
+        version: "0.0.13"
     });
 
 })();
