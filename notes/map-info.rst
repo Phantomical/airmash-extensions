@@ -2,11 +2,13 @@
 Game Map Details
 ================
 
-The world map is a Miller Projection with parts near the poles cut off.
-The \\( (0, 0) \\) latitude and longitude is at map coordinates \\((x, y) = (0, 2300)\\).
+The world map is a 
+`Miller Projection <https://en.wikipedia.org/wiki/Miller_cylindrical_projection>`_ 
+with parts near the poles cut off. The (0, 0) latitude
+and longitude is at map coordinates (x, y) = (0, 2300).
 
-To convert from \\((x, y)\\) coordinates to latitude and longitude, use the 
-following formula.
+To convert from (x, y) coordinates to latitude and longitude,
+use the following formula.
 
 .. math::
 	:nowrap:
