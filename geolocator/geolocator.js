@@ -12,7 +12,7 @@
     }
     function getLocation(x, y) {
         if (x == 0 && y == 0) {
-            UI.addChatLine(Players.getMe(), "You are in space", 2);
+            UI.addChatLine(Players.getMe(), "You are in space.", 2);
         }
 
         // throttle(1000, false, function () {
