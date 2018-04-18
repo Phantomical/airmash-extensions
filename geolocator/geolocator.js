@@ -15,8 +15,6 @@
         let loc = getLatLonStr(x, y);
         $.getJSON(MAPSAPI + loc, function (data) {
 
-            console.log(data);
-
             let message = '';
 
             if (!!data.countryName) {
@@ -26,7 +24,7 @@
                 message = 'No country found for your current location';
             }
 
-            UI.addChatLine(Players.getMe().id, message, 2);
+            UI.addChatLine(Players.getMe(), message, 2);
         });
         //}, false);
     }
