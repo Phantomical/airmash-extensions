@@ -11,6 +11,10 @@
             "&lng=" + lon.toString().substring(0, 10);
     }
     function getLocation(x, y) {
+        if (x == 0 && y == 0) {
+            UI.addChatLine(Players.getMe(), "You are in space", 2);
+        }
+
         // throttle(1000, false, function () {
         let loc = getLatLonStr(x, y);
         $.getJSON(MAPSAPI + loc, function (data) {
@@ -45,7 +49,7 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.0.9"
+        version: "0.0.10"
     });
 
 }();
