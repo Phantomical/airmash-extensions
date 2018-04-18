@@ -14,9 +14,9 @@
         // throttle(1000, false, function () {
         let loc = getLatLonStr(x, y);
         $.getJSON(MAPSAPI + loc, function (data) {
-            let response = JSON.parse(data);
 
             console.log(data);
+            let response = JSON.parse(data);
 
             let message = '';
 
@@ -48,7 +48,7 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.0.7"
+        version: "0.0.8"
     });
 
 }();
