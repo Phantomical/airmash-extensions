@@ -7,7 +7,9 @@
     "browserify": "browserify --node geolocator.js -o geolocator.min.js",
     "build": "browserify --node geolocator.js | babel -s inline --presets=es2015 | uglifyjs -cm > geolocator.min.js",
     "lint": "jshint geolocator.js",
-    "prebuild": "npm run lint"
+    "prebuild": "npm run lint",
+    "simplify": "simplify-geojson -t 2.0 < node_modules/which-country/lib/data.geo.json > data2.geo.json && type data2.geo.json > node_modules/which-country/lib/data.geo.json",
+    "restore": "type data.geo.json > node_modules/which-country/lib/data.geo.json"
   },
   "author": "",
   "license": "MIT",
@@ -24,6 +26,7 @@
   },
   "dependencies": {
     "i18n-iso-countries": "^3.6.1",
+    "simplify-geojson": "^1.0.3",
     "throttle-debounce": "^1.0.1",
     "which-country": "^1.0.0"
   }
