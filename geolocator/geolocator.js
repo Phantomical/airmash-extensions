@@ -1,20 +1,34 @@
 !function () {
     //const throttle = require('throttle-debounce/throttle');
 
-    const MAPSAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
+    const MAPSAPI = "http://api.geonames.org/countrySubdivisionJSON?username=geolocatorairmash&maxRows=1&";
 
     function getLatLonStr(x, y) {
         let lat = -(Players.getMe().pos.y - 2370) * (82.2 / 8192);
         let lon = Players.getMe().pos.x * (180 / 16384);
 
-        return lat.toString().substring(0, 10) + "+" + lon.toString().substring(0, 10);
+        return 'lat=' + lat.toString().substring(0, 10) +
+            "&lng=" + lon.toString().substring(0, 10);
     }
     function getLocation(x, y) {
-       // throttle(1000, false, function () {
-            let loc = getLatLonStr(x, y);
-            $.getJSON(MAPSAPI + loc, function (data) {
-                UI.addChatLine(Players.getMe().id, data, 2);
-            });
+        // throttle(1000, false, function () {
+        let loc = getLatLonStr(x, y);
+        $.getJSON(MAPSAPI + loc, function (data) {
+            let response = JSON.parse(data);
+
+            console.log(data);
+
+            let message = '';
+
+            if (!!response.countryName) {
+                message = 'You are in ' + response.countryName;
+            }
+            else {
+                message = 'No country found for your current location';
+            }
+
+            UI.addChatLine(Players.getMe().id, message, 2);
+        });
         //}, false);
     }
 
@@ -34,7 +48,7 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.0.5"
+        version: "0.0.6"
     });
 
 }();
