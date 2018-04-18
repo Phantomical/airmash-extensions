@@ -277,8 +277,8 @@
 
     function getLatLon(x, y) {
         return {
-            lat: -(180 / Math.PI) * 1.25 * Math.atan(Math.sinh((y - 2284) * 0.8 * (Math.PI * 0.5 / 8192))),
-            lon: (x + 47) * (180 / 16384),
+            lat: -(180 / Math.PI) * 1.25 * Math.atan(Math.sinh((y - 2300) * 0.8 * (Math.PI * 0.5 / 8192))),
+            lon: x * (180 / 16384),
         };
     }
 
@@ -302,7 +302,7 @@
             message = 'No country found for your current location';
         }
 
-        UI.addChatMessage(message, true);
+        window.UI.addChatMessage(message, true);
     }
 
     function sendLocation() {
@@ -311,13 +311,13 @@
         getLocation(pos.x, pos.y);
     }
 
-    SWAM.on("keyup", function (event) {
+    window.SWAM.on("keyup", function (event) {
         // If j
         if (am_enabled && event.keyCode === 74) {
             sendLocation();
         }
     });
-    SWAM.on("gameRunning", function () {
+    window.SWAM.on("gameRunning", function () {
         const oldParseCommand = UI.parseCommand;
         UI.parseCommand = function (cmd) {
             let pos = Players.getMe().pos;
