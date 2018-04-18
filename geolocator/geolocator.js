@@ -16,12 +16,11 @@
         $.getJSON(MAPSAPI + loc, function (data) {
 
             console.log(data);
-            let response = JSON.parse(data);
 
             let message = '';
 
-            if (!!response.countryName) {
-                message = 'You are in ' + response.countryName;
+            if (!!data.countryName) {
+                message = 'You are in ' + data.countryName;
             }
             else {
                 message = 'No country found for your current location';
@@ -48,7 +47,7 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.0.8"
+        version: "0.0.9"
     });
 
 }();
