@@ -21,6 +21,7 @@
     "esversion": 6
   },
   "dependencies": {
-    "throttle-debounce": "^1.0.1"
+    "throttle-debounce": "^1.0.1",
+    "which-country": "^1.0.0"
   }
 }
