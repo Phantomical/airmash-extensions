@@ -246,7 +246,8 @@
         "YEM": "Yemen",
         "ZMB": "Zambia",
         "ZWE": "Zimbabwe",
-        "RKS": "Republic of Kosovo"
+        "RKS": "Republic of Kosovo",
+        "SSD": "South Sudan"
     };
     const command = "/whereami";
     let am_enabled = true;
@@ -330,7 +331,7 @@
             else if (cmd.toLowerCase() === '/googleme') {
                 UI.addChatLine(Players.getMe(),
                     'You are at https://maps.google.com/maps?q=loc:' +
-                    + coords.lat + "," + coords.lon,
+                    coords.lat + "," + coords.lon,
                     2);
             }
             else {
