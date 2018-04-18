@@ -1,7 +1,7 @@
 !function () {
     //const throttle = require('throttle-debounce/throttle');
 
-    const MAPSAPI = "http://api.geonames.org/countrySubdivisionJSON?username=geolocatorairmash&maxRows=1&";
+    const MAPSAPI = "https://secure.geonames.org/countrySubdivisionJSON?username=geolocatorairmash&maxRows=1&";
 
     function getLatLonStr(x, y) {
         let lat = -(Players.getMe().pos.y - 2370) * (82.2 / 8192);
@@ -48,7 +48,7 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.0.6"
+        version: "0.0.7"
     });
 
 }();
