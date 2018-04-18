@@ -17,3 +17,14 @@ following formula.
 	lon =& (\frac{180}{16384})x
 	\end{align}
 	
+Alternatively, the following JavaScript function 
+will convert from (x,y) to (lat, lon)
+
+.. code-block:: javascript
+
+    function getLatLon(x, y) {
+        return {
+            lat: -(180 / Math.PI) * 1.25 * Math.atan(Math.sinh((y - 2300) * 0.8 * (Math.PI * 0.5 / 8192))),
+            lon: x * (180 / 16384),
+        };
+    }
