@@ -257,26 +257,19 @@
     };
 
     function createSettingsProvider() {
-        let sp = new SettingsProvider({
-            enabled: true,
-            boundkey: 74
-        }, function (values) {
+        let sp = new SettingsProvider(GeolocatorSettings, function (values) {
             GeolocatorSettings.am_enabled = values.enabled;
 
             let keycode = parseInt(values.boundkey, 10);
-            if (keycode.isNaN()) {
-                if (typeof values.boundkey === 'string' || values.boundkey instanceof String) {
-                    keycode = values.boundkey.charAt(0);
-                }
-                else {
-                    keycode = 74;
-                }
+            if (isNaN(keycode)) {
+                keycode = 74;
+                GeolocatorSettings.am_enabled = false;
             }
             else {
                 keycode = Math.floor(keycode);
             }
 
-            GeolocatorSettings.boundkey = values.boundkey;
+            GeolocatorSettings.boundkey = keycode;
         });
 
         let section = sp.addSection("Geolocator");
@@ -286,7 +279,7 @@
             "Whether the configured key will show you the country you're in.",
             { useToggle: false });
 
-        section.addStringField(
+        section.addString(
             "boundkey",
             "The shortcut key for /whereami");
 
@@ -339,7 +332,9 @@
 
     window.SWAM.on("keyup", function (event) {
         // If j
-        if (am_enabled && event.keyCode === 74) {
+        if (GeolocatorSettings.am_enabled &&
+            event.keyCode === GeolocatorSettings.boundkey)
+        {
             sendLocation();
         }
     });
@@ -372,7 +367,7 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.1.3",
+        version: "0.1.4",
         settingsProvider: createSettingsProvider()
     });
 
