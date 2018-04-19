@@ -9,7 +9,8 @@
     "lint": "jshint geolocator.js",
     "prebuild": "npm run lint",
     "simplify": "simplify-geojson -t 2.0 < node_modules/which-country/lib/data.geo.json > data2.geo.json && type data2.geo.json > node_modules/which-country/lib/data.geo.json",
-    "restore": "type data.geo.json > node_modules/which-country/lib/data.geo.json"
+    "restore": "type data.geo.json > node_modules/which-country/lib/data.geo.json",
+    "minify2": "browserify --node geolocator.js | google-closure-compiler-js --languageIn ES6 --compilationLevel ADVANCED --externs externs.js > geolocator.min.js"
   },
   "author": "",
   "license": "MIT",
@@ -25,6 +26,7 @@
     "esversion": 6
   },
   "dependencies": {
+    "google-closure-compiler-js": "^20180402.0.0",
     "i18n-iso-countries": "^3.6.1",
     "simplify-geojson": "^1.0.3",
     "throttle-debounce": "^1.0.1",

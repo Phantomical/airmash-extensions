@@ -11,6 +11,7 @@ Airmash Documentation
    :caption: Contents:
 
    map-info
+   adding-custom-commands
 
 Indices and tables
 ==================

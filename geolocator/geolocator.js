@@ -251,13 +251,13 @@
     };
     const command = "/whereami";
 
-    window.GeolocatorSettings = {
+    GeolocatorSettings = {
         enabled: true,
         boundkey: 74
     };
 
     function createSettingsProvider() {
-        let sp = new SettingsProvider(GeolocatorSettings, function (values) {
+        let sp = new SettingsProvider(window.GeolocatorSettings, function (values) {
             GeolocatorSettings.am_enabled = values.enabled;
 
             let keycode = parseInt(values.boundkey, 10);
@@ -321,30 +321,25 @@
             message = 'No country found for your current location';
         }
 
-        window.UI.addChatMessage(message, true);
+        UI.addChatMessage(message, true);
     }
 
-    function sendLocation() {
-        let pos = Players.getMe().pos;
-
-        getLocation(pos.x, pos.y);
-    }
-
-    window.SWAM.on("keyup", function (event) {
+    SWAM.on("keyup", function (event) {
         // If j
         if (GeolocatorSettings.am_enabled &&
             event.keyCode === GeolocatorSettings.boundkey)
         {
-            sendLocation();
+            let pos = Players.getMe().pos;
+            getLocation(pos.x, pos.y);
         }
     });
-    window.SWAM.on("gameRunning", function () {
+    SWAM.on("gameRunning", function () {
         const oldParseCommand = UI.parseCommand;
         UI.parseCommand = function (cmd) {
             let pos = Players.getMe().pos;
             let coords = getLatLon(pos.x, pos.y);
             if (cmd.toLowerCase() === command) {
-                sendLocation();
+                getLocation(pos.x, pos.y);
             }
             else if (cmd.toLowerCase() === '/mycoords') {
                 UI.addChatMessage("lat: " + coords.lat + ", lon: " + coords.lon);
