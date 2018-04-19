@@ -4,4 +4,6 @@
 geolocator/node_modules
 geolocator/data2.geo.json
 
+execjs/node_modules
+
 notes/_build
