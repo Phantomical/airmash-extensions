@@ -250,19 +250,45 @@
         "SSD": "South Sudan"
     };
     const command = "/whereami";
-    let am_enabled = true;
+
+    window.GeolocatorSettings = {
+        enabled: true,
+        boundkey: 74
+    };
 
     function createSettingsProvider() {
-        let sp = new SettingsProvider({ enabled: true }, function (values) {
-            am_enabled = values.enabled;
+        let sp = new SettingsProvider({
+            enabled: true,
+            boundkey: 74
+        }, function (values) {
+            GeolocatorSettings.am_enabled = values.enabled;
+
+            let keycode = parseInt(values.boundkey, 10);
+            if (keycode.isNaN()) {
+                if (typeof values.boundkey === 'string' || values.boundkey instanceof String) {
+                    keycode = values.boundkey.charAt(0);
+                }
+                else {
+                    keycode = 74;
+                }
+            }
+            else {
+                keycode = Math.floor(keycode);
+            }
+
+            GeolocatorSettings.boundkey = values.boundkey;
         });
 
         let section = sp.addSection("Geolocator");
 
         section.addBoolean(
             "enabled",
-            "Whether the key J will show you the country you're in.",
+            "Whether the configured key will show you the country you're in.",
             { useToggle: false });
+
+        section.addStringField(
+            "boundkey",
+            "The shortcut key for /whereami");
 
         return sp;
     }
@@ -346,7 +372,7 @@
         id: "Geolocator",
         description: "An extension to tell you where you are.",
         author: "STEAMROLLER",
-        version: "0.1.2",
+        version: "0.1.3",
         settingsProvider: createSettingsProvider()
     });
 
