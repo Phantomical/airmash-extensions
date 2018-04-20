@@ -1,7 +1,12 @@
 
 (function () {
     function evalFn(script) {
-        window.eval(script);
+        try {
+            window.eval(script);
+        }
+        catch (err) {
+            UI.addChatMessage(err.name + ': ' + err.message);
+        }
     }
 
     SWAM.on("gameRunning", function () {
@@ -22,7 +27,7 @@
         name: "ExecJS",
         id: "steamroller-execjs",
         description: "Run javascript from the chat box.",
-        version: "0.0.2"
+        version: "0.0.3",
     };
 
     obj["author"] = "STEAMROLLER";
