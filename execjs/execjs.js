@@ -2,7 +2,7 @@
 (function () {
     function evalFn(script) {
         try {
-            window.eval(script);
+            UI.addChatMessage(new String(window.eval(script)));
         }
         catch (err) {
             UI.addChatMessage(err.name + ': ' + err.message);
@@ -27,7 +27,7 @@
         name: "ExecJS",
         id: "steamroller-execjs",
         description: "Run javascript from the chat box.",
-        version: "0.0.3",
+        version: "0.0.4",
     };
 
     obj["author"] = "STEAMROLLER";
