@@ -6,4 +6,7 @@ geolocator/data2.geo.json
 
 execjs/node_modules
 
+chatshortcuts/node_modules
+chatshortcuts/.vs
+
 notes/_build

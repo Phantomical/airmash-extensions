@@ -30,7 +30,9 @@
         version: "0.0.4",
     };
 
+    /* jshint ignore:start */
     obj["author"] = "STEAMROLLER";
+    /* jshint ignore:end */
 
     SWAM.registerExtension(obj);
 }());
