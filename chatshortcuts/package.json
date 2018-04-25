@@ -1,16 +1,16 @@
 {
-  "name": "execjs",
+  "name": "chatshortcuts",
   "version": "0.0.1",
   "description": "A StarMash extension to run JavaScript from the chat bar.",
-  "main": "execjs.js",
+  "main": "chatshortcuts.js",
   "scripts": {
-    "browserify": "browserify --node execjs.js -o execjs.min.js",
-    "build": "browserify --node execjs.js | babel -s inline --presets=es2015 | uglifyjs -cm > execjs.min.js",
-    "lint": "jshint execjs.js",
+    "browserify": "browserify --node chatshortcuts.js -o chatshortcuts.min.js",
+    "build": "browserify --node chatshortcuts.js | babel -s inline --presets=es2015 | uglifyjs -cm > chatshortcuts.min.js",
+    "lint": "jshint chatshortcuts.js",
     "prebuild": "npm run lint",
     "simplify": "simplify-geojson -t 2.0 < node_modules/which-country/lib/data.geo.json > data2.geo.json && type data2.geo.json > node_modules/which-country/lib/data.geo.json",
     "restore": "type data.geo.json > node_modules/which-country/lib/data.geo.json",
-    "minify2": "google-closure-compiler-js execjs.js --languageIn ES6 --compilationLevel ADVANCED --externs externs.js > execjs.min.js"
+    "minify2": "google-closure-compiler-js chatshortcuts.js --languageIn ES6 --compilationLevel ADVANCED --externs externs.js > chatshortcuts.min.js"
   },
   "author": "STEAMROLLER",
   "license": "MIT",

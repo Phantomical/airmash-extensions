@@ -24,3 +24,10 @@ var Players = {
 }
 
 var GeolocatorSettings = null;
+
+var Network = {
+    sendChat: function(e) {},
+    sendTeam: function(e) {},
+    sendWhisper: function(e) {},
+    sendSay: function(e) {}
+};
